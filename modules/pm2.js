@@ -1,31 +1,44 @@
 import pm2 from "pm2"
 
 // console.log(pm2);
+export const connection = () => {
+  return new Promise((resolve, reject) => {
+    pm2.connect((err, result) => {
+      if (err) {
+        process.exit(2)
+
+        reject(err)
+      }
+
+      resolve(result)
+    })
+  })
+}
 
 export const list = () => {
-  pm2.connect((err) => {
-    if (err) {
-      console.error(err)
-      process.exit(2)
-    }
+  return new Promise((resolve, reject) => {
+    pm2.list((err, result) => {
+      if (err) {
+        process.exit(2)
 
+        reject(err)
+      }
 
-    pm2.list((err, list) => {
-      console.log(err, list, ">>>>>>") // return array
+      resolve(result)
     })
   })
 }
 
 export const start = (processName) => {
-  pm2.connect((err) => {
-    if (err) {
-      console.error(err)
-      process.exit(2)
-    }
-
-
+  return new Promise((resolve, reject) => {
     pm2.start(processName, (err, result) => {
-      console.log(err, result, ">>>>>>")
+      if (err) {
+        process.exit(2)
+
+        reject(err)
+      }
+
+      resolve(result)
     })
   })
 }
@@ -51,8 +64,20 @@ export const restart = (processName) => {
       process.exit(2)
     }
 
-
     pm2.restart(processName, (err, result) => {
+      console.log(err, result, ">>>>>>")
+    })
+  })
+}
+
+export const remove = (processName) => {
+  pm2.connect((err) => {
+    if (err) {
+      console.error(err)
+      process.exit(2)
+    }
+
+    pm2.delete(processName, (err, result) => {
       console.log(err, result, ">>>>>>")
     })
   })
