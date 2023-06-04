@@ -44,41 +44,43 @@ export const start = (processName) => {
 }
 
 export const stop = (processName) => {
-  pm2.connect((err) => {
-    if (err) {
-      console.error(err)
-      process.exit(2)
-    }
-
-
+  return new Promise((resolve, reject) => {
     pm2.stop(processName, (err, result) => {
-      console.log(err, result, ">>>>>>")
+      if (err) {
+        process.exit(2)
+
+        reject(err)
+      }
+
+      resolve(result)
     })
   })
 }
 
 export const restart = (processName) => {
-  pm2.connect((err) => {
-    if (err) {
-      console.error(err)
-      process.exit(2)
-    }
-
+  return new Promise((resolve, reject) => {
     pm2.restart(processName, (err, result) => {
-      console.log(err, result, ">>>>>>")
+      if (err) {
+        process.exit(2)
+
+        reject(err)
+      }
+
+      resolve(result)
     })
   })
 }
 
 export const remove = (processName) => {
-  pm2.connect((err) => {
-    if (err) {
-      console.error(err)
-      process.exit(2)
-    }
-
+  return new Promise((resolve, reject) => {
     pm2.delete(processName, (err, result) => {
-      console.log(err, result, ">>>>>>")
+      if (err) {
+        process.exit(2)
+
+        reject(err)
+      }
+
+      resolve(result)
     })
   })
 }
