@@ -25,6 +25,7 @@
     "dev": "",
     "test": ""
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "pm2": "^5.3.0"
+  }
 }
