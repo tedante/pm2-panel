@@ -1,6 +1,5 @@
 import pm2 from "pm2"
 
-// console.log(pm2);
 export const connection = () => {
   return new Promise((resolve, reject) => {
     pm2.connect((err, result) => {
