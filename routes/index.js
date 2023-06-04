@@ -1,10 +1,9 @@
 
 import { Router } from "express"
+import * as PmController from "../controllers/pm-controller.js"
 
 const router = Router()
 
-router.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+router.get('/', PmController.getList)
 
 export default router

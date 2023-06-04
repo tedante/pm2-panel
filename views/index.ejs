@@ -1,0 +1,31 @@
+<%- include('components/header') %>
+<%- include('components/navbar') %>
+<div class="content">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>PID</th>
+        <th>PM ID</th>
+        <th>Name</th>
+        <th>Path</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(el => { %>
+        <tr>
+          <th><%= el.pid %></th>
+          <th><%= el.pm_id %></th>
+          <th><%= el.name %></th>
+          <th><%= el.pm2_env.pm_exec_path %></th>
+          <td>
+            <a href="/process/<%= el.name %>/start" class="button is-success">Start</a>
+            <a href="/process/<%= el.name %>/restart" class="button is-info">Restart</a>
+            <a href="/process/<%= el.name %>/stop" class="button is-warning">Stop</a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('components/footer') %>
